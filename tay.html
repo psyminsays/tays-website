@@ -143,6 +143,40 @@
             object-fit: cover;
         }
 
+        .video-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            transition: opacity 0.3s;
+        }
+
+        .video-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .play-icon {
+            font-size: 3rem;
+            color: white;
+            background: rgba(233, 69, 96, 0.8);
+            border-radius: 50%;
+            padding: 15px;
+            cursor: pointer;
+        }
+
         .portfolio-overlay {
             position: absolute;
             bottom: 0;
@@ -389,9 +423,17 @@
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <video muted loop>
-                        <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing.mp4?updatedAt=1761892398468" type="video/mp4">
-                    </video>
+                    <div class="video-container">
+                        <video muted loop playsinline preload="metadata">
+                            <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing.mp4?updatedAt=1761892398468" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-overlay">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
                     <div class="portfolio-overlay">
                         <h3>Beachside Glamour</h3>
                         <p>Miami • Summer Campaign</p>
@@ -412,9 +454,17 @@
                     </div>
                 </div>
                 <div class="portfolio-item">
-                    <video muted loop>
-                        <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing%202.mp4?updatedAt=1761892397554" type="video/mp4">
-                    </video>
+                    <div class="video-container">
+                        <video muted loop playsinline preload="metadata">
+                            <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing%202.mp4?updatedAt=1761892397554" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <div class="video-overlay">
+                            <div class="play-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
                     <div class="portfolio-overlay">
                         <h3>Underwater Elegance</h3>
                         <p>Monte Carlo • Swimwear</p>
@@ -509,16 +559,37 @@
                 });
             });
             
-            // Auto-play videos on hover
+            // Video handling with click-to-play overlay
             const videos = document.querySelectorAll('video');
-            videos.forEach(video => {
-                video.addEventListener('mouseenter', function() {
-                    this.play();
+            const videoOverlays = document.querySelectorAll('.video-overlay');
+            
+            videoOverlays.forEach((overlay, index) => {
+                overlay.addEventListener('click', function() {
+                    const video = videos[index];
+                    video.play();
+                    this.classList.add('hidden');
                 });
-                video.addEventListener('mouseleave', function() {
-                    this.pause();
+            });
+            
+            videos.forEach((video, index) => {
+                // Reset video and show overlay when video ends
+                video.addEventListener('ended', function() {
                     this.currentTime = 0;
+                    videoOverlays[index].classList.remove('hidden');
                 });
+                
+                // Show overlay when video is paused
+                video.addEventListener('pause', function() {
+                    videoOverlays[index].classList.remove('hidden');
+                });
+                
+                // Hide overlay when video starts playing
+                video.addEventListener('play', function() {
+                    videoOverlays[index].classList.add('hidden');
+                });
+                
+                // Try to preload videos
+                video.load();
             });
             
             // Show paywall after 30 seconds of browsing
