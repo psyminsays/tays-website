@@ -68,6 +68,11 @@
             color: #e94560;
         }
 
+        .nav-links a.active {
+            color: #e94560;
+            border-bottom: 2px solid #e94560;
+        }
+
         .subscribe-btn {
             background: #e94560;
             color: white;
@@ -85,6 +90,22 @@
             box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4);
         }
 
+        /* Page Sections */
+        .page-section {
+            display: none;
+            padding: 50px 0;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         /* Hero Section */
         .hero {
             text-align: center;
@@ -94,9 +115,22 @@
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 20px;
-            background: linear-gradient(to right, #e94560, #ff9a9e);
+            background: linear-gradient(to right, 
+                #ff0000, #ff8000, #ffff00, #00ff00, 
+                #00ffff, #0000ff, #8000ff, #ff00ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-size: 400% 100%;
+            animation: rainbow 3s ease-in-out infinite;
+        }
+
+        @keyframes rainbow {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
         }
 
         .hero p {
@@ -104,6 +138,69 @@
             max-width: 700px;
             margin: 0 auto 30px;
             color: #b8b8b8;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #e94560;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #b8b8b8;
+            font-size: 1.1rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid #2d4059;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #e94560;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            color: #b8b8b8;
+            font-size: 0.9rem;
         }
 
         /* Portfolio Grid */
@@ -375,8 +472,13 @@
                 font-size: 2.5rem;
             }
             
-            .nav-links {
-                display: none;
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -387,94 +489,201 @@
         <div class="container">
             <nav>
                 <div class="logo">
-                    <span>Tayste The Rainbow</span>
+                    <span>You Know You Want A Tayste!</span>
                 </div>
                 <div class="nav-links">
-                    <a href="https://taystherainbow.com/">Home</a>
-                    <a href="https://taystherainbow.com/about">About Tay</a>
-                    <a href="https://taystherainbow.com/portfolio">Portfolio</a>
-                    <a href="https://taystherainbow.com/contact">Contact</a>
+                    <a href="#" class="nav-link active" data-page="home">Home</a>
+                    <a href="#" class="nav-link" data-page="about">About Tay</a>
+                    <a href="#" class="nav-link" data-page="portfolio">Portfolio</a>
+                    <a href="#" class="nav-link" data-page="contact">Contact</a>
                 </div>
                 <button class="subscribe-btn" id="subscribeBtn">Subscribe</button>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
+    <!-- Home Page -->
+    <section id="home" class="page-section active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Exclusive Modeling Portfolio</h1>
+                <p>Discover captivating photography and videography from a Southern honey. Subscribe for full access to her premium content collection.</p>
+                <button class="subscribe-btn" style="padding: 15px 40px; font-size: 1.1rem;">View Full Portfolio</button>
+            </div>
+        </section>
+
+        <!-- Portfolio Preview -->
+        <section class="portfolio-section">
+            <div class="container">
+                <h2 class="section-title">Portfolio Preview</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://image2url.com/images/1761891544206-609b60c8-5687-4394-8c9e-dc9186f075b1.png" alt="Photo by: Tayste The Rainbow">
+                        <div class="portfolio-overlay">
+                            <h3>Fashion Editorial</h3>
+                            <p>New York • Spring Collection</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="video-container">
+                            <video muted loop playsinline preload="metadata">
+                                <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing.mp4?updatedAt=1761892398468" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h3>Beachside Glamour</h3>
+                            <p>Miami • Summer Campaign</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://image2url.com/images/1761891672684-3a57d8e5-b879-4237-9cf7-1d35858d432a.png" alt="Photo by: Tayste The Rainbow">
+                        <div class="portfolio-overlay">
+                            <h3>Urban Style</h3>
+                            <p>Los Angeles • Streetwear</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <!-- About Tay Page -->
+    <section id="about" class="page-section">
         <div class="container">
-            <h1>You Know You Want A Tayste!</h1>
-            <p>Discover captivating photography and videography from a Southern honey. Subscribe for full access to her premium content collection.</p>
-            <button class="subscribe-btn" style="padding: 15px 40px; font-size: 1.1rem;">View Full Portfolio</button>
+            <div class="about-section">
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://image2url.com/images/1761891544206-609b60c8-5687-4394-8c9e-dc9186f075b1.png" alt="Tayste The Rainbow">
+                    </div>
+                    <div class="about-text">
+                        <h2>About Taylor</h2>
+                        <p>Taylor is a vibrant and talented model known for her captivating presence and unique style that truly lives up to her aura. With a passion for creative expression and a love for the arts, she brings color and energy to every project she undertakes.</p>
+                        
+                        <p>Born and raised in the South, Taylor combines Southern charm with contemporary fashion sensibilities. Her versatility allows her to excel in various genres including fashion editorial, commercial modeling, and artistic photography.</p>
+
+                        <p>When she's not in front of the camera, Taylor enjoys painting, dancing, and advocating for mental health awareness. She believes in using her platform to spread positivity and inspire others to embrace their authentic selves.</p>
+
+                        <p>"Beauty isn't about being perfect - it's about being real, being you, and sharing your unique colors with the world."</p>
+                    </div>
+                </div>
+                
+                <div class="about-stats">
+                    <div class="stat">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Photoshoots</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">Collaborations</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Portfolio Preview -->
-    <section class="portfolio-section">
+    <!-- Portfolio Page -->
+    <section id="portfolio" class="page-section">
         <div class="container">
-            <h2 class="section-title">Portfolio Preview</h2>
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img src="https://image2url.com/images/1761891544206-609b60c8-5687-4394-8c9e-dc9186f075b1.png" alt="Photo by: Tayste The Rainbow">
-                    <div class="portfolio-overlay">
-                        <h3>Fashion Editorial</h3>
-                        <p>New York • Spring Collection</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="video-container">
-                        <video muted loop playsinline preload="metadata">
-                            <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing.mp4?updatedAt=1761892398468" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-icon">
-                                <i class="fas fa-play"></i>
-                            </div>
+            <div class="portfolio-section">
+                <h2 class="section-title">Portfolio Preview</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://image2url.com/images/1761891544206-609b60c8-5687-4394-8c9e-dc9186f075b1.png" alt="Photo by: Tayste The Rainbow">
+                        <div class="portfolio-overlay">
+                            <h3>Fashion Editorial</h3>
+                            <p>New York • Spring Collection</p>
                         </div>
                     </div>
-                    <div class="portfolio-overlay">
-                        <h3>Beachside Glamour</h3>
-                        <p>Miami • Summer Campaign</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://image2url.com/images/1761891672684-3a57d8e5-b879-4237-9cf7-1d35858d432a.png" alt="Photo by: Tayste The Rainbow">
-                    <div class="portfolio-overlay">
-                        <h3>Urban Style</h3>
-                        <p>Los Angeles • Streetwear</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="https://image2url.com/images/1761891825558-ebc70ae8-016c-4946-9b52-f426a1b167b5.png" alt="Photo by: Tayste The Rainbow">
-                    <div class="portfolio-overlay">
-                        <h3>Beauty Campaign</h3>
-                        <p>Paris • Luxury Cosmetics</p>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <div class="video-container">
-                        <video muted loop playsinline preload="metadata">
-                            <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing%202.mp4?updatedAt=1761892397554" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
-                        <div class="video-overlay">
-                            <div class="play-icon">
-                                <i class="fas fa-play"></i>
+                    <div class="portfolio-item">
+                        <div class="video-container">
+                            <video muted loop playsinline preload="metadata">
+                                <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing.mp4?updatedAt=1761892398468" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
                             </div>
                         </div>
+                        <div class="portfolio-overlay">
+                            <h3>Beachside Glamour</h3>
+                            <p>Miami • Summer Campaign</p>
+                        </div>
                     </div>
-                    <div class="portfolio-overlay">
-                        <h3>Square Dancing</h3>
-                        <p>Summer 2025</p>
+                    <div class="portfolio-item">
+                        <img src="https://image2url.com/images/1761891672684-3a57d8e5-b879-4237-9cf7-1d35858d432a.png" alt="Photo by: Tayste The Rainbow">
+                        <div class="portfolio-overlay">
+                            <h3>Urban Style</h3>
+                            <p>Los Angeles • Streetwear</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://image2url.com/images/1761891825558-ebc70ae8-016c-4946-9b52-f426a1b167b5.png" alt="Photo by: Tayste The Rainbow">
+                        <div class="portfolio-overlay">
+                            <h3>Beauty Campaign</h3>
+                            <p>Paris • Luxury Cosmetics</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <div class="video-container">
+                            <video muted loop playsinline preload="metadata">
+                                <source src="https://ik.imagekit.io/0fz4uklv8/tay%20dancing%202.mp4?updatedAt=1761892397554" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="video-overlay">
+                                <div class="play-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="portfolio-overlay">
+                            <h3>Underwater Elegance</h3>
+                            <p>Monte Carlo • Swimwear</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://image2url.com/images/1761891905803-f95795f9-ca4c-4769-b1a8-e976eb4679ae.png" alt="Photo by: Tayste The Rainbow">
+                        <div class="portfolio-overlay">
+                            <h3>High Fashion</h3>
+                            <p>Milan • Runway Collection</p>
+                        </div>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="https://image2url.com/images/1761891905803-f95795f9-ca4c-4769-b1a8-e976eb4679ae.png" alt="Photo by: Tayste The Rainbow">
-                    <div class="portfolio-overlay">
-                        <h3>High Fashion</h3>
-                        <p>Milan • Runway Collection</p>
-                    </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page-section">
+        <div class="container">
+            <div class="hero">
+                <h2>Contact Tayste</h2>
+                <p>For booking inquiries, collaborations, or just to say hello!</p>
+                <div style="max-width: 600px; margin: 40px auto; background: rgba(255,255,255,0.05); padding: 40px; border-radius: 15px; border: 1px solid #2d4059;">
+                    <p style="text-align: center; margin-bottom: 30px; color: #b8b8b8;">
+                        <i class="fas fa-envelope" style="color: #e94560; margin-right: 10px;"></i>
+                        Email: tay@taystherainbow.com
+                    </p>
+                    <p style="text-align: center; margin-bottom: 30px; color: #b8b8b8;">
+                        <i class="fas fa-phone" style="color: #e94560; margin-right: 10px;"></i>
+                        Phone: (206) 497-7384
+                    </p>
+                    <p style="text-align: center; color: #b8b8b8;">
+                        <i class="fas fa-map-marker-alt" style="color: #e94560; margin-right: 10px;"></i>
+                        Based in Greenville, South Carolina
+                    </p>
                 </div>
             </div>
         </div>
@@ -530,6 +739,29 @@
             const subscribeBtn = document.getElementById('subscribeBtn');
             const closePaywall = document.getElementById('closePaywall');
             const planSelectBtns = document.querySelectorAll('.plan-select');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pageSections = document.querySelectorAll('.page-section');
+            
+            // Navigation between pages
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Update active nav link
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target page
+                    pageSections.forEach(section => {
+                        section.classList.remove('active');
+                    });
+                    document.getElementById(targetPage).classList.add('active');
+                    
+                    // Scroll to top
+                    window.scrollTo(0, 0);
+                });
+            });
             
             // Show paywall when subscribe button is clicked
             subscribeBtn.addEventListener('click', function() {
@@ -548,12 +780,9 @@
                 btn.addEventListener('click', function() {
                     const plan = this.getAttribute('data-plan');
                     alert(`Thank you for selecting the ${plan} plan! Redirecting to payment...`);
-                    // In a real implementation, you would redirect to payment processing
-                    // For demo, we'll just close the paywall after a delay
                     setTimeout(() => {
                         paywallOverlay.classList.remove('active');
                         document.body.style.overflow = 'auto';
-                        // Here you would typically grant access to the full content
                     }, 2000);
                 });
             });
@@ -571,23 +800,19 @@
             });
             
             videos.forEach((video, index) => {
-                // Reset video and show overlay when video ends
                 video.addEventListener('ended', function() {
                     this.currentTime = 0;
                     videoOverlays[index].classList.remove('hidden');
                 });
                 
-                // Show overlay when video is paused
                 video.addEventListener('pause', function() {
                     videoOverlays[index].classList.remove('hidden');
                 });
                 
-                // Hide overlay when video starts playing
                 video.addEventListener('play', function() {
                     videoOverlays[index].classList.add('hidden');
                 });
                 
-                // Try to preload videos
                 video.load();
             });
             
