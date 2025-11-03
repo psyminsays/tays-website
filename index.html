@@ -509,7 +509,7 @@
             <div class="container">
                 <h1>You Know You Want A Tayste!</h1>
                 <p>Get the secret recipe. Subscribe for full access to my exclusive content—a sweet blend of modeling, recipes, art, and make-up tutorials.</p>
-                <button class="subscribe-btn" style="padding: 15px 40px; font-size: 1.1rem;">View Entire Portfolio</button>
+                <button class="subscribe-btn" style="padding: 15px 40px; font-size: 1.1rem;" id="heroSubscribeBtn">View Entire Portfolio</button>
             </div>
         </section>
 
@@ -796,10 +796,14 @@
         document.addEventListener('DOMContentLoaded', function() {
             const paywallOverlay = document.getElementById('paywallOverlay');
             const subscribeBtn = document.getElementById('subscribeBtn');
+            const heroSubscribeBtn = document.getElementById('heroSubscribeBtn');
             const closePaywall = document.getElementById('closePaywall');
             const planSelectBtns = document.querySelectorAll('.plan-select');
             const navLinks = document.querySelectorAll('.nav-link');
             const pageSections = document.querySelectorAll('.page-section');
+            
+            // Track if user has already seen the paywall
+            let paywallShown = false;
             
             // Navigation between pages
             navLinks.forEach(link => {
@@ -823,10 +827,14 @@
             });
             
             // Show paywall when subscribe button is clicked
-            subscribeBtn.addEventListener('click', function() {
+            function showPaywall() {
                 paywallOverlay.classList.add('active');
                 document.body.style.overflow = 'hidden';
-            });
+                paywallShown = true;
+            }
+            
+            subscribeBtn.addEventListener('click', showPaywall);
+            heroSubscribeBtn.addEventListener('click', showPaywall);
             
             // Close paywall
             closePaywall.addEventListener('click', function() {
@@ -875,13 +883,15 @@
                 video.load();
             });
             
-            // Show paywall after 30 seconds of browsing
+            // Show paywall after 2 minutes (120 seconds) of browsing
+            // Only if user hasn't already seen it via a button click
             setTimeout(() => {
-                if (!paywallOverlay.classList.contains('active')) {
+                if (!paywallOverlay.classList.contains('active') && !paywallShown) {
                     paywallOverlay.classList.add('active');
                     document.body.style.overflow = 'hidden';
+                    paywallShown = true;
                 }
-            }, 30000);
+            }, 120000); // Changed from 30000 to 120000 (2 minutes)
         });
     </script>
 </body>
