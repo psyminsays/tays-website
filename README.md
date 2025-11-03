@@ -1,4 +1,4 @@
-# 🌟 Tay's Premium Model Portfolio Website
+# 🌟 Tay's Model Portfolio with Subscriber-Only Media
 
 A captivating, premium model portfolio website featuring high-quality photography and videography, protected by a **soft paywall** system. Built with modern web standards for a seamless, responsive experience across all devices.
 
